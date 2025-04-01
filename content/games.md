@@ -15,6 +15,17 @@ Available Games
 
 #default
 <div id="gamesList" class="games-list"></div>
+::
+
+<div id="backgroundOverlay" class="background-overlay hidden"></div>
+<div id="iframeContainer" class="iframe-container hidden">
+    <iframe id="gameIframe" class="game-iframe"></iframe>
+    <div class="iframe-controls">
+        <button class="iframe-button" onclick="hideIframe()">&lt;</button>
+        <button class="iframe-button" onclick="toggleFullscreen()">⛶</button>
+    </div>
+</div>
+
 <script>
 async function loadGames() {
     try {
@@ -89,16 +100,6 @@ function toggleFullscreen() {
 
 window.onload = loadGames;
 </script>
-::
-
-<div id="backgroundOverlay" class="background-overlay hidden"></div>
-<div id="iframeContainer" class="iframe-container hidden">
-    <iframe id="gameIframe" class="game-iframe"></iframe>
-    <div class="iframe-controls">
-        <button class="iframe-button" onclick="hideIframe()">&lt;</button>
-        <button class="iframe-button" onclick="toggleFullscreen()">⛶</button>
-    </div>
-</div>
 
 <style>
   body {
