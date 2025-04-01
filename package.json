@@ -1,0 +1,25 @@
+{
+    "name": "cascadesite",
+    "version": "1.0.0",
+    "description": "Cascade website using Docus and Nuxt",
+    "scripts": {
+      "dev": "nuxt dev",
+      "build": "nuxt build",
+      "generate": "nuxt generate",
+      "start": "nuxt start",
+      "deploy": "nuxt generate && gh-pages -d dist"
+    },
+    "dependencies": {
+      "nuxt": "latest",
+      "@nuxt/content": "latest",
+      "@nuxtjs/tailwindcss": "latest",
+      "@nuxt-themes/docus": "latest"
+    },
+    "devDependencies": {
+      "gh-pages": "latest"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/cascadesite/cascade.github.io.git"
+    }
+  }
