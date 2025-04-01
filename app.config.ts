@@ -1,32 +1,39 @@
 export default defineAppConfig({
-    docus: {
+  docus: {
+    title: 'Cascade',
+    description: 'A Game Site Made With Nuxt And Docus',
+    image: '',
+    socials: {
+      github: 'https://github.com/cascadesite/cascadesite.github.io'
+    },
+    aside: {
+      level: 0,
+      exclude: []
+    },
+    header: {
+      logo: false,
       title: 'Cascade',
-      description: 'A Game Site Made With Nuxt And Docus',
-      image: '',
-      socials: {
-        github: 'https://github.com/cascadesite/cascadesite.github.io'
-      },
-      aside: {
-        level: 0,
-        exclude: []
-      },
-      header: {
-        logo: true,
-        links: [
-          { name: 'Home', href: '/' },
-          { name: 'Games', href: '/games' }
-        ]
-      },
-      footer: {
-        text: '© 2025 Cascade. All rights reserved.'
-      }
+      links: [
+        { name: 'Home', href: '/' },
+        { name: 'Games', href: '/games' }
+      ]
+    },
+    footer: {
+      iconLinks: [
+        {
+          href: 'https://nuxt.com',
+          icon: 'simple-icons:nuxtdotjs'
+        }
+      ],
+      text: '© 2025 Cascade. All rights reserved.'
     }
-    css: [
-      '@fontsource/quicksand'
-    ],
-    style: {
-      body: {
-        fontFamily: 'Quicksand, sans-serif'
-      }
+  },
+  css: [
+    '@fontsource/quicksand'
+  ],
+  style: {
+    body: {
+      fontFamily: 'Quicksand, sans-serif'
     }
-  })
+  }
+})
