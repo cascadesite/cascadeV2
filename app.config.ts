@@ -21,4 +21,12 @@ export default defineAppConfig({
         text: '© 2025 Cascade. All rights reserved.'
       }
     }
+    css: [
+      '@fontsource/quicksand'
+    ],
+    style: {
+      body: {
+        fontFamily: 'Quicksand, sans-serif'
+      }
+    }
   })
