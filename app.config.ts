@@ -18,12 +18,6 @@ export default defineAppConfig({
         ]
       },
       footer: {
-        iconLinks: [
-          {
-            href: 'https://nuxt.com',
-            icon: 'simple-icons:nuxtdotjs'
-          }
-        ],
         text: '© 2025 Cascade. All rights reserved.'
       }
     }

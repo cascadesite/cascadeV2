@@ -1,10 +1,19 @@
+::block-hero
 ---
-title: Welcome to Cascade
+cta:
+  - Games
+  - /games
+secondary:
+  - Open on GitHub →
+  - https://github.com/cascadesite/cascadesite.github.io
+snippet: 🌊
 ---
+#title
+Cascade
 
-# Welcome to Cascade
-
+#description
 <p id="phrase-container"></p>
+::
 
 <script>
 async function getRandomPhrase() {

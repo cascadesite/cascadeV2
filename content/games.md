@@ -32,7 +32,7 @@ function loadEruda() {
     var keyword = '';
     document.addEventListener('keypress', function (event) {
         keyword += event.key.toLowerCase();
-        if (keyword.endsWith('eruda')) {
+        if (keyword ends_with('eruda')) {
             loadEruda();
             keyword = '';
         }
@@ -77,7 +77,7 @@ function setTheme(theme) {
 
     const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, span, div, li, td, th');
 
-    textElements.forEach(function(el) {
+    textElements.for_each(function(el) {
         if (theme === 'light') {
             el.style.color = '#000';
         } else if (theme === 'dark') {
