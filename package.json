@@ -1,25 +1,25 @@
 {
-    "name": "cascadesite",
-    "version": "1.0.0",
-    "description": "Cascade website using Docus and Nuxt",
-    "scripts": {
-      "dev": "nuxt dev",
-      "build": "nuxt build",
-      "generate": "nuxt generate",
-      "start": "nuxt start",
-      "deploy": "nuxt generate && gh-pages -d dist"
-    },
-    "dependencies": {
-      "nuxt": "latest",
-      "@nuxt/content": "latest",
-      "@nuxtjs/tailwindcss": "latest",
-      "@nuxt-themes/docus": "latest"
-    },
-    "devDependencies": {
-      "gh-pages": "latest"
-    },
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/cascadesite/cascade.github.io.git"
-    }
+  "name": "cascadesite",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "generate": "nuxi generate",
+    "preview": "nuxi preview",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "nuxt": "3.7.3"
+  },
+  "devDependencies": {
+    "@nuxt-themes/docus": "^1.14.7",
+    "@nuxt/eslint-config": "^0.2.0",
+    "eslint": "^8.50.0",
+    "gh-pages": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cascadesite/cascadesite.github.io.git"
   }
+}
