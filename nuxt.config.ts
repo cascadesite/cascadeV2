@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   extends: '@nuxt-themes/docus',
   app: {
-    baseURL: '/'
+    baseURL: '/cascadeV2'
   },
   head: {
     link: [
