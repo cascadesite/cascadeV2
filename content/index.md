@@ -12,7 +12,7 @@ snippet: 🌊
 Cascade
 
 #description
-<p id="phrase-container"></p>
+#phrase-container
 ::
 
 <script>
@@ -37,7 +37,7 @@ async function getRandomPhrase() {
 }
   
 document.addEventListener('DOMContentLoaded', async () => {
-    const phraseContainer = document.getElementById('phrase-container');
+    const phraseContainer = document.querySelector('#phrase-container');
     const randomPhrase = await getRandomPhrase();
     phraseContainer.textContent = randomPhrase;
 });

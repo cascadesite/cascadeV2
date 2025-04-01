@@ -4,151 +4,26 @@ title: Games
 
 # Games
 
-<input type="text" id="searchInput" class="my-5 p-3 w-1/2 rounded-xl text-center border" placeholder="Search for a game...">
+<input type="text" id="searchInput" class="search-input" placeholder="Search for a game...">
 
-<div id="gamesList" class="flex flex-wrap justify-around p-0 list-none gap-4"></div>
+::card-grid
+#title
+Available Games
 
-<div id="backgroundOverlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 hidden"></div>
-<div id="iframeContainer" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 hidden rounded-xl overflow-hidden z-50 bg-white">
-    <iframe id="gameIframe" class="w-full h-[calc(100%-40px)] border-none"></iframe>
-    <div class="absolute bottom-0 w-full h-10 bg-gradient-to-r from-blue-800 via-blue-500 to-blue-400 rounded-b-xl flex justify-between items-center">
-        <button class="w-10 h-10 bg-transparent border-none text-white text-2xl cursor-pointer flex items-center justify-center hover:bg-white hover:bg-opacity-20" onclick="hideIframe()">&lt;</button>
-        <button class="w-10 h-10 bg-transparent border-none text-white text-2xl cursor-pointer flex items-center justify-center hover:bg-white hover:bg-opacity-20" onclick="toggleFullscreen()">⛶</button>
-    </div>
-</div>
+#root
+:ellipsis
 
+#default
+<div id="gamesList" class="games-list"></div>
 <script>
-// Eruda
-function loadEruda() {
-    var script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/eruda';
-    document.body.appendChild(script);
-    script.onload = function () {
-        eruda.init();
-    };
-}
-
-(function () {
-    var keyword = '';
-    document.addEventListener('keypress', function (event) {
-        keyword += event.key.toLowerCase();
-        if (keyword ends_with('eruda')) {
-            loadEruda();
-            keyword = '';
-        }
-        if (keyword.length > 5) {
-            keyword = keyword.slice(-5);
-        }
-    });
-})();
-
-// Theme
-let themeChanged = false;
-
-function setTheme(theme) {
-    const searchInput = document.getElementById('searchInput');
-    if (theme === 'light') {
-        document.body.style.backgroundColor = '#fff';
-        document.body.style.color = '#000';
-        if (searchInput) {
-            searchInput.style.border = '1px solid #000';
-        }
-    } else if (theme === 'dark') {
-        document.body.style.backgroundColor = '#000';
-        document.body.style.color = '#fff';
-        if (searchInput) {
-            searchInput.style.border = '1px solid #fff';
-        }
-    } else if (theme === 'system') {
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.body.style.backgroundColor = '#000';
-            document.body.style.color = '#fff';
-            if (searchInput) {
-                searchInput.style.border = '1px solid #fff';
-            }
-        } else {
-            document.body.style.backgroundColor = '#fff';
-            document.body.style.color = '#000';
-            if (searchInput) {
-                searchInput.style.border = '1px solid #000';
-            }
-        }
-    }
-
-    const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, span, div, li, td, th');
-
-    textElements.for_each(function(el) {
-        if (theme === 'light') {
-            el.style.color = '#000';
-        } else if (theme === 'dark') {
-            el.style.color = '#fff';
-        } else if (theme === 'system') {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                el.style.color = '#fff';
-            } else {
-                el.style.color = '#000';
-            }
-        }
-    });
-
-    if (themeChanged) {
-        showPopup(`Theme set to ${theme.charAt(0).toUpperCase() + theme.slice(1)}`);
-    }
-
-    localStorage.setItem('theme', theme);
-}
-
-function toggleTheme() {
-    const currentTheme = localStorage.getItem('theme') || 'system';
-    let newTheme;
-
-    if (currentTheme === 'system') {
-        newTheme = 'light';
-    } else if (currentTheme === 'light') {
-        newTheme = 'dark';
-    } else {
-        newTheme = 'system';
-    }
-
-    themeChanged = true;
-    setTheme(newTheme);
-}
-
-function showPopup(message) {
-    const popup = document.createElement('div');
-    popup.className = 'popup fixed top-5 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white p-3 rounded-lg opacity-100 transition-opacity duration-500 z-50';
-    popup.textContent = message;
-    document.body.appendChild(popup);
-    setTimeout(() => {
-        popup.style.opacity = '0';
-    }, 2000);
-    setTimeout(() => {
-        document.body.removeChild(popup);
-    }, 3000);
-}
-
-window.onload = function() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        setTheme(savedTheme);
-    } else {
-        setTheme('system');
-    }
-};
-
-// Game Load
 async function loadGames() {
     try {
         const response = await fetch('games.json');
         const games = await response.json();
         const gamesList = document.getElementById('gamesList');
-        const searchInput = document.getElementById('searchInput');
 
         games.sort((a, b) => a.name.localeCompare(b.name));
 
-        searchInput.addEventListener('input', () => filterGames(games));
-
-        gamesList.innerHTML = '';
         games.forEach(game => {
             createGameCard(game);
         });
@@ -159,92 +34,25 @@ async function loadGames() {
 
 function createGameCard(game) {
     const gamesList = document.getElementById('gamesList');
+    const cardGrid = document.querySelector('.card-grid #default');
 
-    const gameCard = document.createElement('div');
-    gameCard.className = 'game-card relative w-34 h-48 m-2 flex flex-col items-center text-center';
-    gameCard.style.width = '136px';
-    gameCard.style.height = '188px';
-    gameCard.style.margin = '8px';
+    const card = document.createElement('div');
+    card.className = 'card';
+    
+    const title = document.createElement('h3');
+    title.className = 'card-title';
+    title.textContent = game.name;
+    card.appendChild(title);
 
-    const background = document.createElement('div');
-    background.className = 'game-background absolute top-0 left-0 w-full h-34 bg-gradient-to-r from-blue-800 via-blue-500 to-blue-400 rounded-lg z-0 transition-opacity duration-300';
-    background.style.width = '136px';
-    background.style.height = '136px';
-    background.style.top = '-8px';
-    background.style.left = '-8px';
-    background.style.borderRadius = '8px';
-    gameCard.appendChild(background);
+    const description = document.createElement('p');
+    description.className = 'card-description';
+    description.textContent = game.description || '';
+    card.appendChild(description);
 
-    const imageBg = document.createElement('div');
-    imageBg.className = 'game-image-bg absolute top-0 left-0 w-full h-34 bg-gray-500 rounded-lg z-1';
-    imageBg.style.width = '136px';
-    imageBg.style.height = '136px';
-    imageBg.style.borderRadius = '8px';
-    gameCard.appendChild(imageBg);
+    cardGrid.appendChild(card);
+    gamesList.appendChild(card);
 
-    if (game.image) {
-        const img = document.createElement('img');
-        img.src = game.image;
-        img.alt = game.name;
-        img.className = 'game-image w-full h-34 rounded-lg cursor-pointer z-2 object-cover';
-        img.style.width = '136px';
-        img.style.height = '136px';
-        img.style.borderRadius = '8px';
-        img.onclick = () => showIframe(game.path);
-        gameCard.appendChild(img);
-    } else {
-        const noImageText = document.createElement('div');
-        noImageText.className = 'no-image-text w-full h-34 bg-gray-500 text-white flex items-center justify-center rounded-lg cursor-pointer z-2';
-        noImageText.style.width = '136px';
-        noImageText.style.height = '136px';
-        noImageText.style.borderRadius = '8px';
-        noImageText.textContent = game.name;
-        gameCard.appendChild(noImageText);
-        noImageText.onclick = () => showIframe(game.path);
-    }
-
-    const link = document.createElement('a');
-    link.href = '#';
-    link.textContent = game.name;
-    link.className = 'game-link text-white text-lg font-bold mt-2 z-2 w-full truncate';
-    link.style.marginTop = '10px';
-    link.style.visibility = 'hidden';
-    link.style.overflow = 'hidden';
-    link.style.textOverflow = 'ellipsis';
-    link.style.whiteSpace = 'nowrap';
-    link.onclick = () => showIframe(game.path);
-
-    if (game.name.length > 15) {
-        link.classList.add('long-name');
-        link.style.fontSize = '14px';
-    }
-    if (game.name.length > 25) {
-        link.classList.add('very-long-name');
-        link.style.fontSize = '12px';
-    }
-
-    gameCard.appendChild(link);
-    gamesList.appendChild(gameCard);
-
-    gameCard.addEventListener('mouseover', () => {
-        background.style.opacity = '0.6';
-        link.style.visibility = 'visible';
-    });
-    gameCard.addEventListener('mouseout', () => {
-        background.style.opacity = '1';
-        link.style.visibility = 'hidden';
-    });
-}
-
-function filterGames(games) {
-    const searchQuery = document.getElementById('searchInput').value.toLowerCase();
-    const filteredGames = games.filter(game => game.name.toLowerCase().includes(searchQuery));
-
-    const gamesList = document.getElementById('gamesList');
-    gamesList.innerHTML = '';
-    filteredGames.forEach(game => {
-        createGameCard(game);
-    });
+    card.addEventListener('click', () => showIframe(game.path));
 }
 
 function showIframe(path) {
@@ -255,9 +63,6 @@ function showIframe(path) {
     iframe.src = `/${path}`;
     iframeContainer.style.display = 'block';
     backgroundOverlay.style.display = 'block';
-
-    const buttonContainer = document.getElementById('buttonContainer');
-    buttonContainer.style.display = 'flex';
 }
 
 function hideIframe() {
@@ -267,9 +72,6 @@ function hideIframe() {
     iframeContainer.style.display = 'none';
     document.getElementById('gameIframe').src = '';
     backgroundOverlay.style.display = 'none';
-
-    const buttonContainer = document.getElementById('buttonContainer');
-    buttonContainer.style.display = 'none';
 }
 
 function toggleFullscreen() {
@@ -285,5 +87,117 @@ function toggleFullscreen() {
     }
 }
 
-loadGames();
+window.onload = loadGames;
 </script>
+::
+
+<div id="backgroundOverlay" class="background-overlay hidden"></div>
+<div id="iframeContainer" class="iframe-container hidden">
+    <iframe id="gameIframe" class="game-iframe"></iframe>
+    <div class="iframe-controls">
+        <button class="iframe-button" onclick="hideIframe()">&lt;</button>
+        <button class="iframe-button" onclick="toggleFullscreen()">⛶</button>
+    </div>
+</div>
+
+<style>
+  body {
+    font-family: 'Quicksand', sans-serif;
+  }
+
+  .search-input {
+    margin: 20px auto;
+    padding: 15px;
+    width: 50%;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    display: block;
+  }
+
+  .games-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    gap: 20px;
+  }
+
+  .card {
+    width: 200px;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  .card-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+
+  .card-description {
+    font-size: 0.9em;
+    color: #666;
+  }
+
+  .background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  .iframe-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 1001;
+  }
+
+  .game-iframe {
+    width: 100%;
+    height: calc(100% - 40px);
+    border: none;
+  }
+
+  .iframe-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    background: #007bff;
+    color: #fff;
+  }
+
+  .iframe-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 0 20px;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
