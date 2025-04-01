@@ -15,7 +15,7 @@ export default defineAppConfig({
       title: 'Cascade',
       links: [
         { name: 'Home', href: '/' },
-        { name: 'Games', href: '/games' }
+        { name: 'Games', href: '1.games/games' }
       ]
     },
     footer: {
