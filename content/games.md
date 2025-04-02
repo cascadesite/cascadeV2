@@ -13,8 +13,9 @@ Available Games
 #root
 :ellipsis
 
-#default
 <div id="gamesList" class="games-list"></div>
+
+#default
 ::
 
 <div id="backgroundOverlay" class="background-overlay hidden"></div>

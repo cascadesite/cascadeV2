@@ -11,9 +11,7 @@ snippet: 🌊
 #title
 Cascade
 
-#description
 <div id="phrase-container"></div>
-::
 
 <script src="/scripts.js"></script>
 
