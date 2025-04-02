@@ -11,7 +11,9 @@ snippet: 🌊
 #title
 Cascade
 
+#description
 <div id="phrase-container"></div>
+::
 
 <script>
 function loadEruda() {
@@ -39,7 +41,7 @@ function loadEruda() {
 
 async function getRandomPhrase() {
     try {
-        const response = await fetch('../phrases.json');
+        const response = await fetch('/phrases.json');
         const phrases = await response.json();
       
         const ultraRareIndex = phrases.length - 1;

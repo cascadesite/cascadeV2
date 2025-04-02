@@ -53,7 +53,7 @@ function loadEruda() {
 
 async function loadGames() {
     try {
-        const response = await fetch('../games.json');
+        const response = await fetch('/games.json');
         const games = await response.json();
         const gamesList = document.getElementById('gamesList');
 
