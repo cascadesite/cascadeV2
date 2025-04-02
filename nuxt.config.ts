@@ -7,12 +7,5 @@ export default defineNuxtConfig({
     link: [
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap' }
     ],
-    script: [
-      {
-        src: 'https://cdn.jsdelivr.net/npm/eruda',
-        async: true,
-        defer: true
-      }
-    ]
   }
 })
