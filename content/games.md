@@ -6,8 +6,6 @@ title: Games
 
 <input type="text" id="searchInput" class="search-input" placeholder="Search for a game...">
 
-<div id="gamesList" class="games-list"></div>
-
 ::card-grid
 #title
 Available Games
@@ -16,6 +14,7 @@ Available Games
 :ellipsis
 
 #default
+<div id="gamesList" class="games-list"></div>
 ::
 
 <div id="backgroundOverlay" class="background-overlay hidden"></div>
@@ -53,7 +52,7 @@ function loadEruda() {
 
 async function loadGames() {
     try {
-        const response = await fetch('/games.json');
+        const response = await fetch('../games.json');
         const games = await response.json();
         const gamesList = document.getElementById('gamesList');
 

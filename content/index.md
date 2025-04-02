@@ -41,7 +41,7 @@ function loadEruda() {
 
 async function getRandomPhrase() {
     try {
-        const response = await fetch('/phrases.json');
+        const response = await fetch('./phrases.json');
         const phrases = await response.json();
       
         const ultraRareIndex = phrases.length - 1;
