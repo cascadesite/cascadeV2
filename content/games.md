@@ -6,6 +6,8 @@ title: Games
 
 <input type="text" id="searchInput" class="search-input" placeholder="Search for a game...">
 
+<div id="gamesList" class="games-list"></div>
+
 ::card-grid
 #title
 Available Games
@@ -14,7 +16,6 @@ Available Games
 :ellipsis
 
 #default
-<div id="gamesList" class="games-list"></div>
 ::
 
 <div id="backgroundOverlay" class="background-overlay hidden"></div>
@@ -45,7 +46,6 @@ async function loadGames() {
 
 function createGameCard(game) {
     const gamesList = document.getElementById('gamesList');
-    const cardGrid = document.querySelector('.card-grid #default');
 
     const card = document.createElement('div');
     card.className = 'card';
@@ -60,7 +60,6 @@ function createGameCard(game) {
     description.textContent = game.description || '';
     card.appendChild(description);
 
-    cardGrid.appendChild(card);
     gamesList.appendChild(card);
 
     card.addEventListener('click', () => showIframe(game.path));

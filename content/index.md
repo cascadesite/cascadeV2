@@ -11,9 +11,7 @@ snippet: 🌊
 #title
 Cascade
 
-#description
 #phrase-container
-::
 
 <script>
 async function getRandomPhrase() {
