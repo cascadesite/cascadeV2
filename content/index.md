@@ -11,13 +11,7 @@ snippet: 🌊
 #title
 Cascade
 
-<div id="phrase-container"></div>
-
-<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-<script>
-  eruda.init();
-</script>
-<script src="/scripts.js"></script>
+<PhraseContainer />
 
 <style>
     body {
