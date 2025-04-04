@@ -10,12 +10,13 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "nuxt": "3.7.3"
+    "nuxt": "latest",
+    "@nuxt/devtools": "latest"
   },
   "devDependencies": {
-    "@nuxt-themes/docus": "^1.14.7",
-    "@nuxt/eslint-config": "^0.2.0",
-    "eslint": "^8.50.0",
+    "@nuxt-themes/docus": "latest",
+    "@nuxt/eslint-config": "latest",
+    "eslint": "latest",
     "gh-pages": "latest"
   },
   "repository": {
