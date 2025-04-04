@@ -35,5 +35,11 @@ export default defineAppConfig({
     body: {
       fontFamily: 'Quicksand, sans-serif'
     }
+  },
+  head: {
+    script: [
+      { src: 'https://cdn.jsdelivr.net/npm/eruda' },
+      { innerHTML: 'eruda.init();', type: 'text/javascript' }
+    ]
   }
 })
