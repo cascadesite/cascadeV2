@@ -1,6 +1,11 @@
 export default defineNuxtConfig({
   extends: '@nuxt-themes/docus',
-  components: true, // Auto import components
+  components: [
+    {
+      path: '~/components',
+      extensions: ['.vue'],
+    }
+  ],
   app: {
     baseURL: '/cascadeV2'
   },
