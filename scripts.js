@@ -1,4 +1,7 @@
 function loadEruda() {
+    // Check if Eruda is already loaded
+    if (typeof eruda !== 'undefined') return;
+
     var script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/eruda';
     document.body.appendChild(script);
@@ -43,8 +46,13 @@ async function getRandomPhrase() {
   
 document.addEventListener('DOMContentLoaded', async () => {
     const phraseContainer = document.getElementById('phrase-container');
-    const randomPhrase = await getRandomPhrase();
-    phraseContainer.textContent = randomPhrase;
+    if (phraseContainer) {
+        const randomPhrase = await getRandomPhrase();
+        phraseContainer.textContent = randomPhrase;
+    }
+
+    // Call loadGames once DOM content is ready
+    loadGames();
 });
 
 async function loadGames() {
@@ -52,6 +60,11 @@ async function loadGames() {
         const response = await fetch('/games.json');
         const games = await response.json();
         const gamesList = document.getElementById('gamesList');
+
+        if (!gamesList) {
+            console.error("Game list container not found.");
+            return;
+        }
 
         games.sort((a, b) => a.name.localeCompare(b.name));
 
@@ -116,4 +129,5 @@ function toggleFullscreen() {
     }
 }
 
+// Ensures games are loaded when the page is loaded
 window.onload = loadGames;
