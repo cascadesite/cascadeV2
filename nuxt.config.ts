@@ -3,6 +3,15 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/devtools',
   ],
+  plugins: [
+    '~/plugins/components.js',
+  ],
+  buildModules: ['@nuxt/content'],
+  content: {
+    markdown: {
+      remarkPlugins: [require('remark-vue-component')],
+    },
+  },
   devtools: { enabled: true },
   components: [
     {
